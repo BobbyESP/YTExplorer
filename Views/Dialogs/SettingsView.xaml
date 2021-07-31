@@ -1,0 +1,168 @@
+﻿<UserControl
+    x:Class="YTExplorer.Views.Dialogs.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="clr-namespace:YTExplorer.ViewModels.Dialogs"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    MinWidth="300"
+    d:DataContext="{d:DesignInstance Type=dialogs:SettingsViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Style="{DynamicResource MaterialDesignRoot}"
+    mc:Ignorable="d">
+    <StackPanel>
+        <TextBlock
+            Margin="16"
+            FontSize="17"
+            Text="Settings" />
+
+        <!--Auto-updates-->
+        <DockPanel Background="Transparent" LastChildFill="False">
+            <DockPanel.ToolTip>
+                <TextBlock>
+                    <Run Text="Perform automatic updates on every launch" />
+                    <LineBreak />
+                    <Run FontWeight="SemiBold" Text="Warning:" />
+                    <Run Text="disabling this is NOT recommended because the application will stop working when integration with YouTube inevitably breaks in the future" />
+                </TextBlock>
+            </DockPanel.ToolTip>
+            <TextBlock
+                Margin="16,8"
+                DockPanel.Dock="Left"
+                Text="Auto-updates" />
+            <ToggleButton
+                Margin="16,8"
+                DockPanel.Dock="Right"
+                IsChecked="{Binding IsAutoUpdateEnabled}" />
+        </DockPanel>
+
+        <!--  Dark mode  -->
+        <DockPanel
+            Background="Transparent"
+            LastChildFill="False"
+            ToolTip="Usa una paleta de colores oscuros. (Sé que me lo agradecerás, Pato)">
+            <TextBlock
+                Margin="16,8"
+                DockPanel.Dock="Left"
+                Text="Modo oscuro" />
+            <ToggleButton
+                x:Name="DarkModeToggleButton"
+                Margin="16,8"
+                Checked="DarkModeToggleButton_Checked"
+                DockPanel.Dock="Right"
+                IsChecked="{Binding IsDarkModeEnabled}"
+                Unchecked="DarkModeToggleButton_Unchecked" />
+        </DockPanel>
+
+        <!--  Inject tags  -->
+        <DockPanel
+            Background="Transparent"
+            LastChildFill="False"
+            ToolTip="Añadir automaticamente tags (cantante, nombre del vídeo, autos, offcial video...) a los vídeos">
+            <TextBlock
+                Margin="16,8"
+                DockPanel.Dock="Left"
+                Text="Integrar automaticamente tags a los vídeos" />
+            <ToggleButton
+                Margin="16,8"
+                DockPanel.Dock="Right"
+                IsChecked="{Binding ShouldInjectTags}" />
+        </DockPanel>
+
+        <!--  Skip existing files  -->
+        <DockPanel
+            Background="Transparent"
+            LastChildFill="False"
+            ToolTip="Cuando descargues uno o varios vídeos, se autodetectará si este archivo ya existe (lo tienes descargado). Si es así, esa descarga se saltará.">
+            <TextBlock
+                Margin="16,8"
+                DockPanel.Dock="Left"
+                Text="Saltar descargas ya existentes." />
+            <ToggleButton
+                Margin="16,8"
+                DockPanel.Dock="Right"
+                IsChecked="{Binding ShouldSkipExistingFiles}" />
+        </DockPanel>
+
+        <!--  File name template  -->
+        <TextBox
+            Margin="16,8"
+            materialDesign:HintAssist.Hint="Plantilla de nombre de archivo"
+            materialDesign:HintAssist.IsFloating="True"
+            Text="{Binding FileNameTemplate}">
+            <TextBox.ToolTip>
+                <TextBlock>
+                    <Run Text="Plantilla usada para generar los nombres de los archivos de salida" />
+                    <LineBreak />
+                    <LineBreak />
+                    <Run Text="Variables disponibles:" />
+                    <LineBreak />
+                    <Run FontWeight="SemiBold" Text="$num" />
+                    <Run Text="- posición del vídeo (si es aplicable)" />
+                    <LineBreak />
+                    <Run FontWeight="SemiBold" Text="$title" />
+                    <Run Text="- título del vídeo" />
+                    <LineBreak />
+                    <Run FontWeight="SemiBold" Text="$author" />
+                    <Run Text="- autor del vídeo" />
+                    <Run Text="- autor del vídeo" />
+                </TextBlock>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <!--  Excluded container formats  -->
+        <TextBox
+            Margin="16,8"
+            materialDesign:HintAssist.Hint="Formatos de archivo excluídos"
+            materialDesign:HintAssist.IsFloating="True"
+            Text="{Binding ExcludedContainerFormats}">
+            <TextBox.ToolTip>
+                <TextBlock>
+                    <Run Text="Los formatos separados aquí por comas se excluirán de las descargas." />
+                    <LineBreak />
+                    <LineBreak />
+                    <Run Text="Ej: webm,ogg" />
+                </TextBlock>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <!--  Max concurrent downloads  -->
+        <StackPanel Background="Transparent" ToolTip="Cuántos vídeos se pueden descargar a la vez. (Esto influirá negativamente en tu velocidad a internet)">
+            <TextBlock Margin="16,8,16,4">
+                <Run Text="Número de descargas simultáneas:" />
+                <Run FontWeight="DemiBold" Text="{Binding MaxConcurrentDownloads, Mode=OneWay}" />
+            </TextBlock>
+            <Slider
+                Margin="16,4,16,8"
+                IsSnapToTickEnabled="True"
+                Maximum="10"
+                Minimum="1"
+                TickFrequency="1"
+                Value="{Binding MaxConcurrentDownloads}" />
+        </StackPanel>
+
+        <!--  Save button  -->
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                Margin="8"
+                HorizontalAlignment="Right"
+                Command="{s:Action DownFFMPEG}"
+                Content="DESCARGAR FFMPEG"
+                Cursor="Hand"
+                Style="{DynamicResource MaterialDesignFlatButton}" />
+
+            <Button
+                Margin="8"
+                HorizontalAlignment="Right"
+                Command="{s:Action Close}"
+                Content="GUARDAR"
+                Cursor="Hand"
+                IsCancel="True"
+                IsDefault="True"
+                Style="{DynamicResource MaterialDesignFlatButton}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>
