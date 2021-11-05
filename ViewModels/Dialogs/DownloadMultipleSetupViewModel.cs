@@ -20,6 +20,8 @@ namespace YTExplorer.ViewModels.Dialogs
 
         public string Title { get; set; } = default!;
 
+        public IVideo Video { get; set; } = default!;
+
         public IReadOnlyList<IVideo> AvailableVideos { get; set; } = Array.Empty<IVideo>();
 
         public IReadOnlyList<IVideo> SelectedVideos { get; set; } = Array.Empty<IVideo>();
@@ -129,11 +131,13 @@ namespace YTExplorer.ViewModels.Dialogs
     {
         public static DownloadMultipleSetupViewModel CreateDownloadMultipleSetupViewModel(
             this IViewModelFactory factory,
+            //IVideo video,
             string title,
             IReadOnlyList<IVideo> availableVideos)
         {
             var viewModel = factory.CreateDownloadMultipleSetupViewModel();
 
+            //viewModel.Video = video;
             viewModel.Title = title;
             viewModel.AvailableVideos = availableVideos;
 

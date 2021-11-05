@@ -34,55 +34,70 @@
             </Grid.RowDefinitions>
 
             <!--  Toolbar  -->
-            <Grid Grid.Row="0" Background="{DynamicResource MaterialDesignDarkBackground}">
+            <Grid Grid.Row="0" Background="{DynamicResource MaterialDesignCardBackground}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <!--  Query and process query button  -->
-                <materialDesign:Card Grid.Column="0" Margin="12,12,0,12">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="12,12,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                        <!--  Query  -->
-                        <TextBox
+                    <!--  Query  -->
+                    <TextBox
                             x:Name="QueryTextBox"
                             Grid.Column="0"
                             Margin="6"
                             VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="URL o palabra clave (usa Shift + Enter para añadir varios a la vez)"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            materialDesign:HintAssist.Hint="URL o nombre (usa Shift + Enter para añadir varios a la vez)"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             AcceptsReturn="True"
                             BorderThickness="0"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
                             FontSize="16"
                             MaxLines="4"
                             PreviewKeyDown="QueryTextBox_OnPreviewKeyDown"
                             Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}"
-                            VerticalScrollBarVisibility="Auto" />
+                            VerticalScrollBarVisibility="Auto" Cursor="IBeam" />
 
-                        <!--  Process query button  -->
-                        <Button
+                    <!--  Process query button  -->
+                    <Button
                             Grid.Column="1"
                             Margin="0,6,6,6"
                             Padding="4"
                             Command="{s:Action ProcessQuery}"
                             IsDefault="True"
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            ToolTip="Procesar cola (Enter)">
-                            <materialDesign:PackIcon
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            ToolTip="Procesar cola (Enter)" Cursor="Hand">
+                        <materialDesign:PackIcon
                                 Width="24"
                                 Height="24"
                                 Kind="ArrowRight" />
-                        </Button>
-                    </Grid>
-                </materialDesign:Card>
+                    </Button>
+                </Grid>
 
                 <!--  Settings button  -->
-                <Button
+
+                <materialDesign:PopupBox HorizontalAlignment="Right"
+                                         Grid.Column="1"
+                                         Margin="6"
+                                         Padding="4" 
+                                         Foreground="{DynamicResource MaterialDesignDarkBackground}">
+                    <StackPanel>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" Content="Settings" Command="{s:Action ShowSettings}"/>
+                        <Separator/>
+                        <Button Content="About it" Style="{StaticResource MaterialDesignRaisedButton}" Margin="3" Command="{s:Action ShowAboutIt}"/>
+                        <Button Content="GitHub" Style="{StaticResource MaterialDesignRaisedButton}" Margin="3" Command="{s:Action OpenRepo}" />
+                    </StackPanel>
+                    
+                </materialDesign:PopupBox>
+                
+                <!--<Button
                     Grid.Column="1"
                     Margin="6"
                     Padding="4"
@@ -97,13 +112,13 @@
                         Width="24"
                         Height="24"
                         Kind="Settings" />
-                </Button>
+                </Button>-->
             </Grid>
 
             <!--  Progress  -->
             <ProgressBar
                 Grid.Row="1"
-                Background="{DynamicResource MaterialDesignDarkBackground}"
+                Background="{DynamicResource MaterialDesignCardBackground}"
                 IsIndeterminate="{Binding IsProgressIndeterminate}"
                 Value="{Binding ProgressManager.Progress, Mode=OneWay}" />
 

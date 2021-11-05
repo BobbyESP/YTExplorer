@@ -15,5 +15,7 @@ namespace YTExplorer.ViewModels.Framework
         MessageBoxViewModel CreateMessageBoxViewModel();
 
         SettingsViewModel CreateSettingsViewModel();
+
+        AboutViewModel CreateAboutViewModel();
     }
 }

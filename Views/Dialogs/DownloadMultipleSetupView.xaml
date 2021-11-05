@@ -96,6 +96,9 @@
                                     <Run Text="{Binding Duration, Mode=OneWay}" />
                                     <Run Text="/" />
                                     <Run Text="{Binding Author, Mode=OneWay}" />
+                                    <Run Text="/" />
+                                    <Run Text="{Binding Video.Engagement.ViewCount, StringFormat=\{0:N0\}, Mode=OneWay}" />
+                                    <Run Text="visualizaciones" />
                                 </TextBlock>
                             </StackPanel>
 
@@ -132,6 +135,7 @@
                     Margin="8"
                     VerticalAlignment="Center"
                     IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
                     ItemsSource="{Binding AvailableFormats}"
                     SelectedItem="{Binding SelectedFormat}" />
             </StackPanel>
@@ -150,6 +154,7 @@
                     Margin="8"
                     VerticalAlignment="Center"
                     IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
                     ItemsSource="{Binding AvailableQualityPreferences}"
                     SelectedItem="{Binding SelectedVideoQualityPreference}">
                     <ComboBox.ItemTemplate>

@@ -39,7 +39,7 @@ namespace YTExplorer
         {
                 base.OnUnhandledException(e);
 
-                MessageBox.Show(e.Exception.ToString(), ""Ha ocurrido un error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(e.Exception.ToString(), "Ha ocurrido un error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
 #endif

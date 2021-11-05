@@ -86,6 +86,22 @@
                 DockPanel.Dock="Right"
                 IsChecked="{Binding ShouldSkipExistingFiles}" />
         </DockPanel>
+        
+        <!--Auto-select all songs in a playlist-->
+
+        <DockPanel
+            Background="Transparent"
+            LastChildFill="False"
+            ToolTip="Al insertar una URL de una Playlist, auto-seleccionar todos los vídeos para ser descargados">
+            <TextBlock
+                Margin="16,8"
+                DockPanel.Dock="Left"
+                Text="Auto-seleccionar videos playlist"/>
+            <ToggleButton
+                Margin="16,8"
+                DockPanel.Dock="Right"
+                IsChecked="{Binding ShouldSelectFullPlaylist}"/>
+        </DockPanel>
 
         <!--  File name template  -->
         <TextBox

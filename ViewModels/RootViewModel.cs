@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gress;
 using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
 using Stylet;
 using Tyrrrz.Extensions;
 using YTExplorer.Models;
@@ -127,6 +128,25 @@ namespace YTExplorer.ViewModels
             await _dialogManager.ShowDialogAsync(dialog);
         }
 
+        public async void ShowAboutIt()
+        {
+            /*var dialog = _viewModelFactory.CreateAboutViewModel();
+            await _dialogManager.ShowDialogAsync(dialog);*/
+
+            Notifications.Enqueue("Getting builded... Sorry :(");
+        }
+
+        public void OpenRepo()
+        {
+            var ps = new ProcessStartInfo("https://github.com/BobbyESP/YTExplorer")
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
+            Notifications.Enqueue("Redirecting...");
+        }
+
         private void EnqueueDownload(DownloadViewModel download)
         {
             // Cancel and remove downloads with the same file path
@@ -195,6 +215,7 @@ namespace YTExplorer.ViewModels
                         return;
 
                     EnqueueDownload(download);
+                    Notifications.Enqueue("Comenzando descarga de un único vídeo... ");
                 }
 
                 // Multiple videos
@@ -240,6 +261,7 @@ namespace YTExplorer.ViewModels
         {
             download.Cancel();
             Downloads.Remove(download);
+            Notifications.Enqueue("Se ha cancelado una descarga");
         }
 
         public void RemoveInactiveDownloads() =>

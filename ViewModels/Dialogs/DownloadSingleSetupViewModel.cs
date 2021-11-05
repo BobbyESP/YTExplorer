@@ -8,6 +8,7 @@ using YTExplorer.Utils;
 using YTExplorer.ViewModels.Components;
 using YTExplorer.ViewModels.Framework;
 using YoutubeExplode.Videos;
+using MaterialDesignThemes.Wpf;
 
 namespace YTExplorer.ViewModels.Dialogs
 {
@@ -26,6 +27,8 @@ namespace YTExplorer.ViewModels.Dialogs
 
         public IReadOnlyList<SubtitleDownloadOption> AvailableSubtitleOptions { get; set; } =
             Array.Empty<SubtitleDownloadOption>();
+
+        public ISnackbarMessageQueue Notifications { get; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(5));
 
         public VideoDownloadOption? SelectedVideoOption { get; set; }
 

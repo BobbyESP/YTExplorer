@@ -38,12 +38,37 @@
             </TextBlock.ContextMenu>
         </TextBlock>
 
-        <!--  Author  -->
-        <TextBlock
+        <!--  Author and Views -->
+        <Grid
             Grid.Row="1"
-            Margin="8"
-            FontSize="15"
-            Text="{Binding Video.Author.Title}" />
+            Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="15"
+                HorizontalAlignment="Left"
+                Text="{Binding Video.Author.Title}" />
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                FontSize="16">
+                <Run Text="{Binding Video.Engagement.ViewCount, StringFormat=\{0:N0\}, Mode=OneWay}" />
+                <Run Text="visualizaciones" />
+            </TextBlock>
+
+
+        </Grid>
+
 
         <Grid
             Grid.Row="2"
@@ -83,6 +108,7 @@
                     VerticalAlignment="Center"
                     materialDesign:ComboBoxAssist.ShowSelectedItem="True"
                     IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
                     ItemsSource="{Binding AvailableVideoOptions}"
                     SelectedItem="{Binding SelectedVideoOption}" />
             </StackPanel>
@@ -103,6 +129,7 @@
                     materialDesign:ComboBoxAssist.ShowSelectedItem="True"
                     IsEnabled="{Binding ShouldDownloadSubtitles}"
                     IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
                     ItemsSource="{Binding AvailableSubtitleOptions}"
                     SelectedItem="{Binding SelectedSubtitleOption}" />
             </StackPanel>
@@ -118,7 +145,7 @@
                 Command="{s:Action Confirm}"
                 Content="DESCARGAR"
                 IsDefault="True"
-                Style="{DynamicResource MaterialDesignFlatButton}" />
+                Style="{DynamicResource MaterialDesignRaisedButton}" />
 
             <!--  Cancel  -->
             <Button
@@ -127,7 +154,7 @@
                 Content="CANCELAR"
                 Cursor="Hand"
                 IsCancel="True"
-                Style="{DynamicResource MaterialDesignFlatButton}" />
+                Style="{DynamicResource MaterialDesignRaisedButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

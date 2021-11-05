@@ -15,6 +15,8 @@ namespace YTExplorer.Services
 
         public bool ShouldSkipExistingFiles { get; set; }
 
+        public bool ShouldSelectFullPlaylist { get; set;  }
+
         public string FileNameTemplate { get; set; } = FileNameGenerator.DefaultTemplate;
 
         public IReadOnlyList<string>? ExcludedContainerFormats { get; set; }

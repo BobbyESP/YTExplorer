@@ -1,5 +1,6 @@
 ﻿using System;
 using Stylet;
+using MaterialDesignThemes.Wpf;
 
 namespace YTExplorer.ViewModels.Framework
 {

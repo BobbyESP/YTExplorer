@@ -33,6 +33,12 @@ namespace YTExplorer.ViewModels.Dialogs
             set => _settingsService.ShouldSkipExistingFiles = value;
         }
 
+        public bool ShouldSelectFullPlaylist
+        {
+            get => _settingsService.ShouldSelectFullPlaylist;
+            set => _settingsService.ShouldSelectFullPlaylist = value;
+        }
+
         public string FileNameTemplate
         {
             get => _settingsService.FileNameTemplate;
