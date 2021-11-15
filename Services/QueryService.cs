@@ -85,7 +85,7 @@ namespace YTExplorer.Services
                 return new ExecutedQuery(query, $"Buscar: {query.Value}", videos);
             }
 
-            throw new ArgumentException($"No se ha podido hacer la cola '{query}'.", nameof(query));
+            throw new ArgumentException($"No se ha podido realizar la búsqeuda '{query}'.", nameof(query));
         }
 
         public async Task<IReadOnlyList<ExecutedQuery>> ExecuteQueriesAsync(
