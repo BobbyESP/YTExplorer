@@ -130,10 +130,11 @@ namespace YTExplorer.ViewModels
 
         public async void ShowAboutIt()
         {
+            Notifications.Enqueue("Getting builded... Sorry :(");
+
             /*var dialog = _viewModelFactory.CreateAboutViewModel();
             await _dialogManager.ShowDialogAsync(dialog);*/
 
-            Notifications.Enqueue("Getting builded... Sorry :(");
         }
 
         public void OpenRepo()
